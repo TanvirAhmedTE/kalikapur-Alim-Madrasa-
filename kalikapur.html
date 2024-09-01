@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalikapur Alim Madrasa - Student Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9f4; /* Subtle green background */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .student-list {
+            margin-top: 30px;
+        }
+
+        .student-list h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .student {
+            background-color: #e9e9e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .student img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .note {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #d1e7dd;
+            border-radius: 5px;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .upload-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kalikapur Alim Madrasa</h1>
+        <nav>
+            <ul>
+                <li><a href="#form">Submit Information</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="form">
+            <h2>Submit Your Information</h2>
+            <form id="studentForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="class" placeholder="Class" required>
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="text" name="phone" placeholder="Phone Number (Optional)">
+                <textarea name="about" placeholder="About (e.g., hobbies, goals)" rows="4" required></textarea>
+                
+                <div class="upload-btn-wrapper">
+                    <button class="upload-btn">Upload Profile Picture</button>
+                    <input type="file" name="profilePicture" accept="image/*">
+                </div>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+
+        <section id="resources">
+            <h2>Resource Library</h2>
+            <div id="resourcesList">
+                <!-- Resource links or embedded content -->
+            </div>
+        </section>
+
+        <section id="feedback">
+            <h2>Feedback</h2>
+            <form id="feedbackForm" action="https://formspree.io/f/YOUR_FEEDBACK_FORM_ID" method="POST">
+                <textarea name="feedback" placeholder="Your Feedback" rows="4" required></textarea>
+                <input type="submit" value="Submit Feedback">
+            </form>
+        </section>
+
+        <section id="profile">
+            <h2>Your Profile</h2>
+            <div id="profileDetails">
+                <!-- Profile Information Here -->
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Kalikapur Alim Madrasa. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const studentForm = document.getElementById('studentForm');
+        const studentsContainer = document.getElementById('profileDetails');
+
+        studentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.querySelector('input[name="name"]').value;
+            const studentClass = document.querySelector('input[name="class"]').value;
+            const age = document.querySelector('input[name="age"]').value;
+            const phone = document.querySelector('input[name="phone"]').value;
+            const about = document.querySelector('textarea[name="about"]').value;
+            const profilePicture = document.querySelector('input[name="profilePicture"]').files[0];
+            let profilePictureUrl = '';
+
+            if (profilePicture) {
+                profilePictureUrl = URL.createObjectURL(profilePicture);
+            } else {
+                profilePictureUrl = 'https://via.placeholder.com/100'; // Default image if no profile picture is uploaded
+            }
+
+            const studentDiv = document.createElement('div');
+            studentDiv.classList.add('student');
+            studentDiv.innerHTML = `
+                <img src="${profilePictureUrl}" alt="Profile Picture">
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Class:</strong> ${studentClass}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+                <p><strong>About:</strong> ${about}</p>
+                <button class="edit-btn">Edit</button>
+                <div class="note">
+                    <h4>Notes</h4>
+                    <textarea placeholder="Add notes..."></textarea>
+                </div>
+            `;
+
+            studentsContainer.appendChild(studentDiv);
+
+            // Clear form fields after submission
+            studentForm.reset();
+        });
+
+        studentsContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('edit-btn')) {
+                const studentDiv = event.target.parentElement;
+                const name = studentDiv.querySelector('p:nth-of-type(1)').textContent.split(': ')[1];
+                const studentClass = studentDiv.querySelector('p:nth-of-type(2)').textContent.split(': ')[1];
+                const age = studentDiv.querySelector('p:nth-of-type(3)').textContent.split(': ')[1];
+                const phone = studentDiv.querySelector('p:nth-of-type(4)')?.textContent.split(': ')[1] || '';
+                const about = studentDiv.querySelector('p:nth-of-type(5)').textContent.split(': ')[1];
+
+                document.querySelector('input[name="name"]').value = name;
+                document.querySelector('input[name="class"]').value = studentClass;
+                document.querySelector('input[name="age"]').value = age;
+                document.querySelector('input[name="phone"]').value = phone;
+                document.querySelector('textarea[name="about"]').value = about;
+
+                studentDiv.remove();
+            }
+        });
+    </script>
+</body>
+</html>
